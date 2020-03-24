@@ -18,7 +18,34 @@ class ShipTest < Minitest::Test
 
   def test_it_has_starting_health
     cruiser = Ship.new("Cruiser", 3)
-    require "pry";binding.pry
+
     assert_equal 3, cruiser.health
+  end
+
+  def test_it_hasnt_been_hit
+    cruiser = Ship.new("Cruiser", 3)
+
+    assert_equal false, cruiser.sunk?
+  end
+
+  def test_it_has_been_hit
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+
+    assert_equal 2, cruiser.health
+    assert_equal false, cruiser.sunk?
+  end
+
+  def test_it_has_sunk
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
+    assert_equal 2, cruiser.health
+    assert_equal false, cruiser.sunk?
+    cruiser.hit
+    assert_equal 1, cruiser.health
+    assert_equal false, cruiser.sunk?
+    cruiser.hit
+    assert_equal 0, cruiser.health
+    assert_equal true, cruiser.sunk?
   end
 end
