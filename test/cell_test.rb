@@ -28,8 +28,11 @@ class CellTest < Minitest::Test
     assert_equal false, @cell.empty?
   end
 
-  def test_has_been_fired_upon
+  def test_can_be_fired_upon
     @cell.place_ship(@cruiser)
     assert_equal false, @cell.fired_upon?
+
+    @cell.fire_upon
+    assert_equal true, @cell.fired_upon?
   end
 end
