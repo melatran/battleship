@@ -6,4 +6,8 @@ class Ship
     @name = name
     @length = length
   end
+
+  def health
+    health = @length
+  end
 end
