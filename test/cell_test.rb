@@ -14,5 +14,6 @@ class CellTest < Minitest::Test
 
   def test_it_has_attributes
     assert_equal "B4", @cell.coordinate
+    assert_equal nil, @cell.ship
   end
 end
