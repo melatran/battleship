@@ -14,7 +14,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_cells_as_hash
-    require "pry";binding.pry
     assert_equal Hash, @board.cells.class
   end
 end
