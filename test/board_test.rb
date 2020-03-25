@@ -7,6 +7,8 @@ require './lib/board.rb'
 class BoardTest < Minitest::Test
   def setup
     @board = Board.new
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   def test_it_exists
@@ -23,5 +25,11 @@ class BoardTest < Minitest::Test
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
+  end
+
+  def test_returns_valid_placement
+    #Testing # of coordinates = length of ship
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
+    assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
   end
 end
