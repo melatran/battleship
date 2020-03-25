@@ -31,6 +31,6 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    coordinates.length == ship.length
+    coordinates.length == ship.length && coordinates.all? {|coordinate| valid_coordinate? (coordinate)}
   end
 end
