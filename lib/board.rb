@@ -31,6 +31,20 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    coordinates.length == ship.length && coordinates.all? {|coordinate| valid_coordinate? (coordinate)}
+    coordinates.length == ship.length && coordinates.all? {|coordinate| valid_coordinate? (coordinate)} &&
+    place_horizontal?(coordinates)
+  end
+
+  def place_horizontal?(coordinates)
+    coordinates.each_cons(2).all? do |coordinate1, coordinate2|
+      coordinate1_letter = coordinate1[0].ord #A of A1
+      coordinate1_number = coordinate1[1].to_i #1 of A1
+
+      coordinate2_letter = coordinate2[0].ord
+      coordinate2_number = coordinate2[1].to_i
+
+      coordinate1_letter == coordinate2_letter &&
+      coordinate2_number == (coordinate1_number + 1)
+    end
   end
 end
