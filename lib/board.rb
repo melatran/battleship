@@ -23,13 +23,12 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    # @cells.keys.any? {|location| location == coordinate}
     @cells[coordinate] != nil
   end
 
   def valid_placement?(ship, coordinates)
       if ship.length == coordinates.length && coordinates.all? { |coordinate| valid_coordinate? (coordinate) }
-        if place_ship?(coordinates) == true && is_occupied?(coordinates) == false
+        if can_place_ship?(coordinates) == true && is_occupied?(coordinates) == false
           true
         else
           false
@@ -43,7 +42,7 @@ class Board
     coordinates.any? { |coordinate| !@cells[coordinate].empty? }
   end
 
-  def place_horizontal?(coordinates)
+  def valid_horizontal_coordinates?(coordinates)
     coordinates.each_cons(2).all? do |coordinate1, coordinate2|
       coordinate1_letter = coordinate1[0].ord #A of A1
       coordinate1_number = coordinate1[1].to_i #1 of A1
@@ -51,12 +50,11 @@ class Board
       coordinate2_letter = coordinate2[0].ord
       coordinate2_number = coordinate2[1].to_i
 
-      coordinate1_letter == coordinate2_letter &&
-      coordinate1_number == (coordinate2_number - 1)
+      coordinate1_letter == coordinate2_letter && coordinate1_number == (coordinate2_number - 1)
     end
   end
 
-  def place_vertical?(coordinates)
+  def valid_vertical_coordinates?(coordinates)
     coordinates.each_cons(2).all? do |coordinate1, coordinate2|
       coordinate1_letter = coordinate1[0].ord #A of A1
       coordinate1_number = coordinate1[1].to_i #1 of A1
@@ -64,12 +62,11 @@ class Board
       coordinate2_letter = coordinate2[0].ord
       coordinate2_number = coordinate2[1].to_i
 
-      coordinate1_letter == (coordinate2_letter - 1) &&
-      coordinate2_number == coordinate1_number
+      coordinate1_letter == (coordinate2_letter - 1) && coordinate2_number == coordinate1_number
     end
   end
 
-  def place_ship?(coordinates)
-    place_horizontal?(coordinates) || place_vertical?(coordinates)
+  def can_place_ship?(coordinates)
+    valid_horizontal_coordinates?(coordinates) || valid_vertical_coordinates?(coordinates)
   end
 end
