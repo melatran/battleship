@@ -32,7 +32,7 @@ class Board
 
   def valid_placement?(ship, coordinates)
       if ship.length == coordinates.length && coordinates.all? { |coordinate| valid_coordinate? (coordinate) }
-        if place_ship?(coordinates) == true && is_occupied?(coordinates) == false
+        if can_place_ship?(coordinates) == true && is_occupied?(coordinates) == false
           true
         else
           false
@@ -70,7 +70,7 @@ class Board
     end
   end
 
-  def place_ship?(coordinates)
+  def can_place_ship?(coordinates)
     valid_horizontal_coordinates?(coordinates) || valid_vertical_coordinates?(coordinates)
   end
 end
