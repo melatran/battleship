@@ -54,8 +54,7 @@ class Board
       coordinate2_letter = coordinate2[0].ord
       coordinate2_number = coordinate2[1].to_i
 
-      coordinate1_letter == coordinate2_letter &&
-      coordinate1_number == (coordinate2_number - 1)
+      coordinate1_letter == coordinate2_letter && coordinate1_number == (coordinate2_number - 1)
     end
   end
 
@@ -67,8 +66,7 @@ class Board
       coordinate2_letter = coordinate2[0].ord
       coordinate2_number = coordinate2[1].to_i
 
-      coordinate1_letter == (coordinate2_letter - 1) &&
-      coordinate2_number == coordinate1_number
+      coordinate1_letter == (coordinate2_letter - 1) && coordinate2_number == coordinate1_number
     end
   end
 
