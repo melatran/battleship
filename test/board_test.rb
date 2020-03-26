@@ -55,6 +55,5 @@ class BoardTest < Minitest::Test
 
   def test_is_occupied
     assert_equal false, @board.is_occupied?(["A1", "A2", "A3"])
-
   end
 end
