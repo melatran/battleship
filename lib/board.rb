@@ -42,7 +42,7 @@ class Board
       end
     end
 
-    def is_occupied?(coordinates)
+  def is_occupied?(coordinates)
     coordinates.any? { |coordinate| !@cells[coordinate].empty? }
   end
 
