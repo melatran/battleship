@@ -6,15 +6,11 @@ class Ship
   def initialize(name, length)
     @name = name
     @length = length
-    @health = health
-  end
-
-  def health
-    health = @length
+    @health = length
   end
 
   def hit
-    @length -= 1
+    @health -= 1
   end
 
   def sunk?
