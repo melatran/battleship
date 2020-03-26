@@ -46,7 +46,7 @@ class Board
     coordinates.any? { |coordinate| !@cells[coordinate].empty? }
   end
 
-  def place_horizontal?(coordinates)
+  def valid_horizontal_coordinates?(coordinates)
     coordinates.each_cons(2).all? do |coordinate1, coordinate2|
       coordinate1_letter = coordinate1[0].ord #A of A1
       coordinate1_number = coordinate1[1].to_i #1 of A1
@@ -59,7 +59,7 @@ class Board
     end
   end
 
-  def place_vertical?(coordinates)
+  def valid_vertical_coordinates?(coordinates)
     coordinates.each_cons(2).all? do |coordinate1, coordinate2|
       coordinate1_letter = coordinate1[0].ord #A of A1
       coordinate1_number = coordinate1[1].to_i #1 of A1
@@ -73,6 +73,6 @@ class Board
   end
 
   def place_ship?(coordinates)
-    place_horizontal?(coordinates) || place_vertical?(coordinates)
+    valid_horizontal_coordinates?(coordinates) || valid_vertical_coordinates?(coordinates)
   end
 end
