@@ -23,11 +23,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    if @cells[coordinate]==nil
-      false
-    else
-      true
-    end
+    @cells.keys.any? {|location| location == coordinate}
   end
 
   def valid_placement?(ship, coordinates)
