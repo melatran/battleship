@@ -32,8 +32,7 @@ class Board
 
   def valid_placement?(ship, coordinates)
       if ship.length == coordinates.length && coordinates.all? { |coordinate| valid_coordinate? (coordinate) }
-        if place_ship?(coordinates) == true
-          #need to add a check to see if all coordinates are empty
+        if place_ship?(coordinates) == true && is_occupied?(coordinates) == false
           true
         else
           false
@@ -43,6 +42,9 @@ class Board
       end
     end
 
+    def is_occupied?(coordinates)
+    coordinates.any? { |coordinate| !@cells[coordinate].empty? }
+  end
 
   def place_horizontal?(coordinates)
     coordinates.each_cons(2).all? do |coordinate1, coordinate2|
@@ -69,7 +71,6 @@ class Board
       coordinate2_number == coordinate1_number
     end
   end
-
 
   def place_ship?(coordinates)
     place_horizontal?(coordinates) || place_vertical?(coordinates)
