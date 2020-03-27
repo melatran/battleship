@@ -69,4 +69,10 @@ class Board
   def can_place_ship?(coordinates)
     valid_horizontal_coordinates?(coordinates) || valid_vertical_coordinates?(coordinates)
   end
+
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
+        @cells[coordinate].place_ship(ship)
+    end
+  end
 end
