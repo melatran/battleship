@@ -6,5 +6,8 @@ require './lib/board.rb'
 require './lib/game.rb'
 
 class GameTest < Minitest::Test
-  test
+  def test_game_exits
+    game = Game.new
+    assert_instance_of Game, game
+  end
 end
