@@ -22,6 +22,11 @@ class Game
   end
 
   def set_the_game
-    p "test"
+    coordinates = @computer_board.cells.keys.sample(@computer_cruiser.length)
+    if @computer_board.valid_placement?(@computer_cruiser, coordinates) == true
+      p coordinates
+    else
+      set_the_game
+      end
   end
 end
