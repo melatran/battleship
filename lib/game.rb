@@ -51,7 +51,6 @@ class Game
     end
   end
 
-
   def give_player_explanations
     p "I have laid out my ships on the grid."
     p "You need to lay out your two ships."
@@ -85,5 +84,53 @@ class Game
      place_human_submarine_coordinates
     end
     puts @human_board.render(true)
+    start_turn
+  end
+
+  def start_turn
+    p "Prepare to die..."
+    p "=============COMPUTER BOARD============="
+    puts @computer_board.render
+    p "=============PLAYER BOARD============="
+    puts @human_board.render(true)
+    # until someone has lost
+    human_fire_shot
+    # user shot results
+    # computer_fire_shot
+    # computer shot results
+
+  end
+
+  def human_fire_shot
+    p "Enter the coordinate for your shot:"
+    @shot_coordinate = gets.chomp.upcase
+    if @computer_board.valid_coordinate?(@shot_coordinate)
+      @computer_board.cells[@shot_coordinate].fire_upon
+      puts @computer_board.render
+    else
+      p "Please enter a valid coordinate:"
+      human_fire_shot
+    end
+    p human_shot_results
+  end
+
+  def human_shot_results
+    if @computer_board.cells[@shot_coordinate].render == 'M'
+      "Your shot on #{@shot_coordinate} was a miss."
+    elsif @computer_board.cells[@shot_coordinate].render == 'H'
+      "Your shot on #{@shot_coordinate} was a hit."
+    elsif @computer_board.cells[@shot_coordinate].render == 'X'
+        "Your shot on #{@shot_coordinate} sunk my ship."
+    end
+  end
+
+  def computer_shot_results
+    if @human_board.cells[@shot_coordinate].render == 'M'
+      "My shot on #{@shot_coordinate} was a miss."
+    elsif @human_board.cells[@shot_coordinate].render == 'H'
+      "My shot on #{@shot_coordinate} was a hit."
+    elsif @human_board.cells[@shot_coordinate].render == 'X'
+        "My shot on #{@shot_coordinate} sunk your ship."
+    end
   end
 end
