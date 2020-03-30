@@ -14,23 +14,29 @@ class Game
     p "Enter p to play. Enter q to quit."
     user_input = gets.chomp.downcase
     if user_input == 'p'
-      setup
+      place_computer_ships
+    elsif user_input == 'q'
+      p "Coward."
+      exit
     else
       p "Invalid Input"
-      exit
+      main_menu
     end
   end
 
   def place_computer_ships
+    computer_cruiser_coordinates
     @computer_board.place(@computer_cruiser, computer_cruiser_coordinates)
+    computer_submarine_coordinates
     @computer_board.place(@computer_submarine, computer_submarine_coordinates)
-    @computer_board.render(true)
+    puts @computer_board.render(true)
     give_player_explanations
   end
 
   def computer_cruiser_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_cruiser.length)
     if @computer_board.valid_placement?(@computer_cruiser, coordinates) == true
+      coordinates
     else
       computer_cruiser_coordinates
     end
@@ -39,6 +45,7 @@ class Game
   def computer_submarine_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_submarine.length)
     if @computer_board.valid_placement?(@computer_submarine, coordinates) == true
+      coordinates
     else
       computer_submarine_coordinates
     end
@@ -49,7 +56,8 @@ class Game
     p "I have laid out my ships on the grid."
     p "You need to lay out your two ships."
     p "The Crusier is three units long and the Submarine is two units long."
-    p @human_board.render(true)
+    puts @human_board.render(true)
+    place_human_cruiser_coordinates
   end
 
   def place_human_cruiser_coordinates
@@ -62,7 +70,8 @@ class Game
      p "Invalid. Try again!"
      place_human_cruiser_coordinates
     end
-    @human_board.render(true)
+    puts @human_board.render(true)
+    place_human_submarine_coordinates
   end
 
   def place_human_submarine_coordinates
@@ -75,6 +84,6 @@ class Game
      p "Invalid. Try again!"
      place_human_submarine_coordinates
     end
-    @human_board.render(true)
+    puts @human_board.render(true)
   end
 end
