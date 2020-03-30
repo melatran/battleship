@@ -21,12 +21,21 @@ class Game
     end
   end
 
-  def set_the_game
+  def place_computer_cruiser
     coordinates = @computer_board.cells.keys.sample(@computer_cruiser.length)
     if @computer_board.valid_placement?(@computer_cruiser, coordinates) == true
       p coordinates
     else
-      set_the_game
-      end
+      place_computer_cruiser
+    end
+  end
+
+  def place_computer_submarine
+    coordinates = @computer_board.cells.keys.sample(@computer_submarine.length)
+    if @computer_board.valid_placement?(@computer_submarine, coordinates) == true
+      p coordinates
+    else
+      place_computer_submarine
+    end
   end
 end
