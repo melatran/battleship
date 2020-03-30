@@ -17,6 +17,7 @@ class GameTest < Minitest::Test
   end
 
   def test_game_exits
+    require "pry";binding.pry
     assert_instance_of Game, @game
   end
 end

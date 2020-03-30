@@ -25,12 +25,12 @@ class Game
     @computer_board.place(@computer_cruiser, computer_cruiser_coordinates)
     @computer_board.place(@computer_submarine, computer_submarine_coordinates)
     @computer_board.render(true)
+    give_player_explanations
   end
 
   def computer_cruiser_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_cruiser.length)
     if @computer_board.valid_placement?(@computer_cruiser, coordinates) == true
-      p coordinates
     else
       computer_cruiser_coordinates
     end
@@ -39,9 +39,42 @@ class Game
   def computer_submarine_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_submarine.length)
     if @computer_board.valid_placement?(@computer_submarine, coordinates) == true
-      p coordinates
     else
       computer_submarine_coordinates
     end
+  end
+
+
+  def give_player_explanations
+    p "I have laid out my ships on the grid."
+    p "You need to lay out your two ships."
+    p "The Crusier is three units long and the Submarine is two units long."
+    p @human_board.render(true)
+  end
+
+  def place_human_cruiser_coordinates
+    p "Enter the squares for the Cruiser (3 spaces):"
+    user_input = gets.chomp.upcase
+    user_coordinates = user_input.split(" ")
+    if @human_board.valid_placement?(@human_cruiser, user_coordinates) == true
+      @human_board.place(@human_cruiser, user_coordinates)
+    else
+     p "Invalid. Try again!"
+     place_human_cruiser_coordinates
+    end
+    @human_board.render(true)
+  end
+
+  def place_human_submarine_coordinates
+    p "Enter the squares for the Cruiser (2 spaces):"
+    user_input = gets.chomp.upcase
+    user_coordinates = user_input.split(" ")
+    if @human_board.valid_placement?(@human_submarine, user_coordinates) == true
+      @human_board.place(@human_submarine, user_coordinates)
+    else
+     p "Invalid. Try again!"
+     place_human_submarine_coordinates
+    end
+    @human_board.render(true)
   end
 end
