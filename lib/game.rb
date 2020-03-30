@@ -21,21 +21,27 @@ class Game
     end
   end
 
-  def place_computer_cruiser
+  def place_computer_ships
+    @computer_board.place(@computer_cruiser, computer_cruiser_coordinates)
+    @computer_board.place(@computer_submarine, computer_submarine_coordinates)
+    @computer_board.render(true)
+  end
+
+  def computer_cruiser_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_cruiser.length)
     if @computer_board.valid_placement?(@computer_cruiser, coordinates) == true
       p coordinates
     else
-      place_computer_cruiser
+      computer_cruiser_coordinates
     end
   end
 
-  def place_computer_submarine
+  def computer_submarine_coordinates
     coordinates = @computer_board.cells.keys.sample(@computer_submarine.length)
     if @computer_board.valid_placement?(@computer_submarine, coordinates) == true
       p coordinates
     else
-      place_computer_submarine
+      computer_submarine_coordinates
     end
   end
 end
