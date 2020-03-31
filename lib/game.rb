@@ -29,7 +29,7 @@ class Game
     @computer_board.place(@computer_cruiser, computer_cruiser_coordinates)
     computer_submarine_coordinates
     @computer_board.place(@computer_submarine, computer_submarine_coordinates)
-    puts @computer_board.render(true)
+    puts @computer_board.render
     give_player_explanations
   end
 
@@ -99,17 +99,31 @@ class Game
 
   def start_turn
     p "Prepare to die..."
-    until @human_cruiser.sunk? && @human_submarine.sunk? || @computer_cruiser.sunk? && @computer_submarine.sunk?
+    until winner
      human_fire_shot
      p human_shot_results
      computer_fire_shot
      p computer_shot_results
    end
-    # user shot results
-    # computer_fire_shot
-    # computer shot results
-
+   p winner
   end
+
+  def winner
+    if (@human_cruiser.sunk? && @human_submarine.sunk?)
+      p "I won!"
+      initialize
+      main_menu
+    elsif (@computer_cruiser.sunk? && @computer_submarine.sunk?)
+      p "You won!"
+      initialize
+      main_menu
+    end
+    # main_menu
+  end
+
+  # def end_game
+  #   main_menu
+  # end
 
   def human_fire_shot
     p "Enter the coordinate for your shot:"
