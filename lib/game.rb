@@ -87,14 +87,24 @@ class Game
     start_turn
   end
 
-  def start_turn
-    p "Prepare to die..."
+  def display_computer_board
     p "=============COMPUTER BOARD============="
     puts @computer_board.render
+  end
+
+  def display_human_board
     p "=============PLAYER BOARD============="
     puts @human_board.render(true)
-    # until someone has lost
-    human_fire_shot
+  end
+
+  def start_turn
+    p "Prepare to die..."
+    until @human_cruiser.sunk? && @human_submarine.sunk? || @computer_cruiser.sunk? && @computer_submarine.sunk?
+     human_fire_shot
+     p human_shot_results
+     computer_fire_shot
+     p computer_shot_results
+   end
     # user shot results
     # computer_fire_shot
     # computer shot results
@@ -106,12 +116,11 @@ class Game
     @shot_coordinate = gets.chomp.upcase
     if @computer_board.valid_coordinate?(@shot_coordinate)
       @computer_board.cells[@shot_coordinate].fire_upon
-      puts @computer_board.render
     else
       p "Please enter a valid coordinate:"
       human_fire_shot
     end
-    p human_shot_results
+    display_computer_board
   end
 
   def human_shot_results
@@ -138,10 +147,9 @@ class Game
     @computer_shot = @human_board.cells.keys.sample
       if @human_board.valid_coordinate?(@computer_shot)
         @human_board.cells[@computer_shot].fire_upon
-        puts @human_board.render
-        computer_shot_results
       else
         computer_fire_shot
       end
+      display_human_board
   end
 end
