@@ -4,4 +4,4 @@ require './lib/board.rb'
 require './lib/game.rb'
 
 game = Game.new
-game.start
+game.main_menu
