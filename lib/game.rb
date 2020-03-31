@@ -56,10 +56,10 @@ class Game
     p "You need to lay out your two ships."
     p "The Crusier is three units long and the Submarine is two units long."
     puts @human_board.render(true)
-    place_human_cruiser_coordinates
+    place_human_cruiser
   end
 
-  def place_human_cruiser_coordinates
+  def place_human_cruiser
     p "Enter the squares for the Cruiser (3 spaces):"
     user_input = gets.chomp.upcase
     user_coordinates = user_input.split(" ")
@@ -67,13 +67,13 @@ class Game
       @human_board.place(@human_cruiser, user_coordinates)
     else
      p "Invalid. Try again!"
-     place_human_cruiser_coordinates
+     place_human_cruiser
     end
     puts @human_board.render(true)
-    place_human_submarine_coordinates
+    place_human_submarine
   end
 
-  def place_human_submarine_coordinates
+  def place_human_submarine
     p "Enter the squares for the Cruiser (2 spaces):"
     user_input = gets.chomp.upcase
     user_coordinates = user_input.split(" ")
@@ -81,20 +81,30 @@ class Game
       @human_board.place(@human_submarine, user_coordinates)
     else
      p "Invalid. Try again!"
-     place_human_submarine_coordinates
+     place_human_submarine
     end
     puts @human_board.render(true)
     start_turn
   end
 
-  def start_turn
-    p "Prepare to die..."
+  def display_computer_board
     p "=============COMPUTER BOARD============="
     puts @computer_board.render
+  end
+
+  def display_human_board
     p "=============PLAYER BOARD============="
     puts @human_board.render(true)
-    # until someone has lost
-    human_fire_shot
+  end
+
+  def start_turn
+    p "Prepare to die..."
+    until @human_cruiser.sunk? && @human_submarine.sunk? || @computer_cruiser.sunk? && @computer_submarine.sunk?
+     human_fire_shot
+     p human_shot_results
+     computer_fire_shot
+     p computer_shot_results
+   end
     # user shot results
     # computer_fire_shot
     # computer shot results
@@ -106,12 +116,11 @@ class Game
     @shot_coordinate = gets.chomp.upcase
     if @computer_board.valid_coordinate?(@shot_coordinate)
       @computer_board.cells[@shot_coordinate].fire_upon
-      puts @computer_board.render
     else
       p "Please enter a valid coordinate:"
       human_fire_shot
     end
-    p human_shot_results
+    display_computer_board
   end
 
   def human_shot_results
@@ -125,12 +134,22 @@ class Game
   end
 
   def computer_shot_results
-    if @human_board.cells[@shot_coordinate].render == 'M'
-      "My shot on #{@shot_coordinate} was a miss."
-    elsif @human_board.cells[@shot_coordinate].render == 'H'
-      "My shot on #{@shot_coordinate} was a hit."
-    elsif @human_board.cells[@shot_coordinate].render == 'X'
-        "My shot on #{@shot_coordinate} sunk your ship."
+    if @human_board.cells[@computer_shot].render == 'M'
+      "My shot on #{@computer_shot} was a miss."
+    elsif @human_board.cells[@computer_shot].render == 'H'
+      "My shot on #{@computer_shot} was a hit."
+    elsif @human_board.cells[@computer_shot].render == 'X'
+        "My shot on #{@computer_shot} sunk your ship."
     end
+  end
+
+  def computer_fire_shot
+    @computer_shot = @human_board.cells.keys.sample
+      if @human_board.valid_coordinate?(@computer_shot)
+        @human_board.cells[@computer_shot].fire_upon
+      else
+        computer_fire_shot
+      end
+      display_human_board
   end
 end
