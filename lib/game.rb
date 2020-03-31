@@ -128,7 +128,7 @@ class Game
   def human_fire_shot
     p "Enter the coordinate for your shot:"
     @shot_coordinate = gets.chomp.upcase
-    if @computer_board.valid_coordinate?(@shot_coordinate)
+    if @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == false
       @computer_board.cells[@shot_coordinate].fire_upon
     else
       p "Please enter a valid coordinate:"
@@ -159,7 +159,7 @@ class Game
 
   def computer_fire_shot
     @computer_shot = @human_board.cells.keys.sample
-      if @human_board.valid_coordinate?(@computer_shot)
+      if @human_board.valid_coordinate?(@computer_shot) && @human_board.cells[@computer_shot].fired_upon? == false
         @human_board.cells[@computer_shot].fire_upon
       else
         computer_fire_shot
