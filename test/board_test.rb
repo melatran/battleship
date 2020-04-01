@@ -55,6 +55,9 @@ class BoardTest < Minitest::Test
 
   def test_is_occupied
     assert_equal false, @board.is_occupied?(["A1", "A2", "A3"])
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal true, @board.is_occupied?(["A1", "A2", "A3"])
+
   end
 
   def test_can_place_ship_on_board
