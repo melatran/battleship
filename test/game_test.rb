@@ -36,4 +36,7 @@ class GameTest < Minitest::Test
     assert_equal "Cruiser", @human_cruiser.name
     assert_equal 3, @human_cruiser.length
   end
+
+  def test_can_place_human_cruiser
+
 end
