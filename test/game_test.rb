@@ -20,5 +20,20 @@ class GameTest < Minitest::Test
     assert_instance_of Game, @game
   end
 
-  
+#initialize method important when user plays again
+  def test_game_can_initialize_computer_ships
+    assert_instance_of Board, @computer_board
+    assert_instance_of Ship, @computer_cruiser
+    assert_instance_of Ship, @computer_submarine
+    assert_equal "Cruiser", @computer_cruiser.name
+    assert_equal 3, @computer_cruiser.length
+  end
+
+  def test_game_can__initialize_user_ships
+    assert_instance_of Board, @human_board
+    assert_instance_of Ship, @human_cruiser
+    assert_instance_of Ship, @human_submarine
+    assert_equal "Cruiser", @human_cruiser.name
+    assert_equal 3, @human_cruiser.length
+  end
 end
