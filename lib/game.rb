@@ -29,7 +29,7 @@ class Game
     @computer_board.place(@computer_cruiser, computer_cruiser_coordinates)
     computer_submarine_coordinates
     @computer_board.place(@computer_submarine, computer_submarine_coordinates)
-    puts @computer_board.render(true)
+    puts @computer_board.render
     give_player_explanations
   end
 
@@ -99,23 +99,35 @@ class Game
 
   def start_turn
     p "Prepare to die..."
-    until @human_cruiser.sunk? && @human_submarine.sunk? || @computer_cruiser.sunk? && @computer_submarine.sunk?
+    until winner
      human_fire_shot
      p human_shot_results
      computer_fire_shot
      p computer_shot_results
    end
-    # user shot results
-    # computer_fire_shot
-    # computer shot results
+   p winner
+  end
 
+  def winner
+    if (@human_cruiser.sunk? && @human_submarine.sunk?)
+      p "I won!"
+      initialize
+      main_menu
+    elsif (@computer_cruiser.sunk? && @computer_submarine.sunk?)
+      p "You won!"
+      initialize
+      main_menu
+    end
   end
 
   def human_fire_shot
     p "Enter the coordinate for your shot:"
     @shot_coordinate = gets.chomp.upcase
-    if @computer_board.valid_coordinate?(@shot_coordinate)
+    if @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == false
       @computer_board.cells[@shot_coordinate].fire_upon
+    elsif @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == true
+      p "You've already hit that spot."
+      human_fire_shot
     else
       p "Please enter a valid coordinate:"
       human_fire_shot
@@ -145,7 +157,7 @@ class Game
 
   def computer_fire_shot
     @computer_shot = @human_board.cells.keys.sample
-      if @human_board.valid_coordinate?(@computer_shot)
+      if @human_board.valid_coordinate?(@computer_shot) && @human_board.cells[@computer_shot].fired_upon? == false
         @human_board.cells[@computer_shot].fire_upon
       else
         computer_fire_shot
