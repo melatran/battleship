@@ -19,12 +19,12 @@ class BoardTest < Minitest::Test
     assert_equal Hash, @board.cells.class
     assert_equal true, @board.cells.keys.include?("A1")
     assert_equal true, @board.cells.keys.include?("D4")
-
   end
 
   def test_is_validates_coordinates
     assert_equal true, @board.valid_coordinate?("A1")
     assert_equal true, @board.valid_coordinate?("D4")
+
     assert_equal false, @board.valid_coordinate?("A5")
     assert_equal false, @board.valid_coordinate?("E1")
     assert_equal false, @board.valid_coordinate?("A22")
@@ -33,6 +33,7 @@ class BoardTest < Minitest::Test
   def test_returns_valid_placement_length
     assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2"])
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
+
     assert_equal false, @board.valid_placement?(@submarine, ["A2", "A3", "A4"])
     assert_equal true, @board.valid_placement?(@submarine, ["A2", "A3"])
 
@@ -53,13 +54,11 @@ class BoardTest < Minitest::Test
   def test_can_valid_horizontal_coordinates
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
     assert_equal false, @board.valid_placement?(@cruiser, ["B2", "C1", "D1"])
-
   end
 
   def test_can_valid_vertical_coordinates
     assert_equal true, @board.valid_placement?(@submarine, ["B1", "C1"])
     assert_equal false, @board.valid_placement?(@submarine, ["B1", "C2"])
-
   end
 
   def test_can_place_ship
@@ -69,9 +68,9 @@ class BoardTest < Minitest::Test
 
   def test_is_occupied
     assert_equal false, @board.is_occupied?(["A1", "A2", "A3"])
+
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal true, @board.is_occupied?(["A1", "A2", "A3"])
-
   end
 
   def test_can_place_ship_on_board
@@ -91,7 +90,6 @@ class BoardTest < Minitest::Test
 
   def test_can_not_overlap_ships_on_board
     @board.place(@cruiser, ["A1", "A2", "A3"])
-
     assert_equal false, @board.valid_placement?(@submarine, ["A1", "B1"])
   end
 
