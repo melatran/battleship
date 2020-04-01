@@ -81,6 +81,8 @@ class BoardTest < Minitest::Test
     assert_equal @cruiser, cell_2.ship
     assert_equal @cruiser, cell_3.ship
     assert_equal true, cell_3.ship == cell_2.ship
+    assert_equal true, @board.is_occupied?(["A1", "A2", "A3"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
   end
 
   def test_can_not_overlap_ships_on_board
