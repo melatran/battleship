@@ -99,11 +99,14 @@ class Game
 
   def start_turn
     p "Prepare to die..."
-    until winner
+    puts " " * 13
+    until winner do
      human_fire_shot
-     p human_shot_results
+     display_computer_board
+     human_shot_results
      computer_fire_shot
-     p computer_shot_results
+     display_human_board
+     computer_shot_results
    end
    p winner
   end
@@ -122,6 +125,7 @@ class Game
 
   def human_fire_shot
     p "Enter the coordinate for your shot:"
+    puts " " * 13
     @shot_coordinate = gets.chomp.upcase
     if @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == false
       @computer_board.cells[@shot_coordinate].fire_upon
@@ -132,26 +136,31 @@ class Game
       p "Please enter a valid coordinate:"
       human_fire_shot
     end
-    display_computer_board
   end
 
   def human_shot_results
     if @computer_board.cells[@shot_coordinate].render == 'M'
-      "Your shot on #{@shot_coordinate} was a miss."
+      p "Your shot on #{@shot_coordinate} was a miss."
+      puts " " * 13
     elsif @computer_board.cells[@shot_coordinate].render == 'H'
-      "Your shot on #{@shot_coordinate} was a hit."
+      p "Your shot on #{@shot_coordinate} was a hit."
+      puts " " * 13
     elsif @computer_board.cells[@shot_coordinate].render == 'X'
-        "Your shot on #{@shot_coordinate} sunk my ship."
+      p "Your shot on #{@shot_coordinate} sunk my ship."
+      puts " " * 13
     end
   end
 
   def computer_shot_results
     if @human_board.cells[@computer_shot].render == 'M'
-      "My shot on #{@computer_shot} was a miss."
+      p "My shot on #{@computer_shot} was a miss."
+      puts " " * 13
     elsif @human_board.cells[@computer_shot].render == 'H'
-      "My shot on #{@computer_shot} was a hit."
+      p "My shot on #{@computer_shot} was a hit."
+      puts " " * 13
     elsif @human_board.cells[@computer_shot].render == 'X'
-        "My shot on #{@computer_shot} sunk your ship."
+      p "My shot on #{@computer_shot} sunk your ship."
+      puts " " * 13
     end
   end
 
@@ -162,6 +171,5 @@ class Game
       else
         computer_fire_shot
       end
-      display_human_board
   end
 end
