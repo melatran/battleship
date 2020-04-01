@@ -46,6 +46,8 @@ class BoardTest < Minitest::Test
 
   def test_can_valid_vertical_coordinates
     assert_equal true, @board.valid_placement?(@submarine, ["B1", "C1"])
+    assert_equal false, @board.valid_placement?(@submarine, ["B2", "C1"])
+
   end
 
   def test_can_place_ship
