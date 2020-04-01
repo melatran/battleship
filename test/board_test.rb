@@ -42,7 +42,7 @@ class BoardTest < Minitest::Test
 
   def test_can_valid_horizontal_coordinates
     assert_equal true, @board.valid_placement?(@cruiser, ["A1", "A2", "A3"])
-    assert_equal true, @board.valid_placement?(@cruiser, ["B1", "C1", "D1"])
+    assert_equal false, @board.valid_placement?(@cruiser, ["B2", "C1", "D1"])
 
   end
 
