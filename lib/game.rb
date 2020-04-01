@@ -118,18 +118,16 @@ class Game
       initialize
       main_menu
     end
-    # main_menu
   end
-
-  # def end_game
-  #   main_menu
-  # end
 
   def human_fire_shot
     p "Enter the coordinate for your shot:"
     @shot_coordinate = gets.chomp.upcase
     if @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == false
       @computer_board.cells[@shot_coordinate].fire_upon
+    elsif @computer_board.valid_coordinate?(@shot_coordinate) && @computer_board.cells[@shot_coordinate].fired_upon? == true
+      p "You've already hit that spot."
+      human_fire_shot
     else
       p "Please enter a valid coordinate:"
       human_fire_shot
