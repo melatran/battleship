@@ -17,6 +17,9 @@ class BoardTest < Minitest::Test
 
   def test_board_has_cells_as_hash
     assert_equal Hash, @board.cells.class
+    assert_equal true, @board.cells.keys.include?("A1")
+    assert_equal true, @board.cells.keys.include?("D4")
+
   end
 
   def test_is_validates_coordinates
