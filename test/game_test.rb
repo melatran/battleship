@@ -16,7 +16,7 @@ class GameTest < Minitest::Test
     @game = Game.new
   end
 
-  def test_game_exits
+  def test_game_exists
     assert_instance_of Game, @game
   end
 
@@ -37,6 +37,14 @@ class GameTest < Minitest::Test
     assert_equal 3, @human_cruiser.length
   end
 
-  def test_can_place_human_cruiser
-
+  # def test_computer_fire_shot
+  #   @human_board.cells["A3"].fire_upon
+  #   assert_equal true, @human_board.cells["A3"].fired_upon?
+  # end
+  #
+  # def test_computer_can_place_on_coordinates
+  #   coordinates = ["A1", "A2", "A3"]
+  #
+  #   assert_equal true, @computer_board.valid_placement?(@computer_cruiser, coordinates)
+  # end
 end
