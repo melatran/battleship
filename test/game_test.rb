@@ -16,7 +16,7 @@ class GameTest < Minitest::Test
     @game = Game.new
   end
 
-  def test_game_exits
+  def test_game_exists
     assert_instance_of Game, @game
   end
 
@@ -37,6 +37,14 @@ class GameTest < Minitest::Test
     assert_equal 3, @human_cruiser.length
   end
 
-  def test_can_place_human_cruiser
+  def test_computer_fire_shot
+    @human_board.cells["A3"].fire_upon
+    assert_equal true, @human_board.cells["A3"].fired_upon?
+    assert_equal true, @game.computer_fire_shot
+  end
 
+  def test_human_fire_shot
+    @computer_board.cells["D4"].fire_upon
+    assert_equal true, @game.human_fire_shot
+  end
 end
