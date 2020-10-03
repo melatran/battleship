@@ -5,6 +5,7 @@ This was a paired project for the backend engineering program at Turing School o
 ## Contributers
 
 [Whitney Kidd](https://github.com/whitneykidd)
+
 [Melanie Tran](https://github.com/melatran)
 
 ## The Game
