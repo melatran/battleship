@@ -4,8 +4,8 @@ This was a paired project for the backend engineering program at Turing School o
 
 ## Contributers
 
-(Whitney Kidd)[https://github.com/whitneykidd]
-(Melanie Tran)[https://github.com/melatran]
+[Whitney Kidd](https://github.com/whitneykidd)
+[Melanie Tran](https://github.com/melatran)
 
 ## The Game
 Both the Human Player and the Computer have a 4 x 4 board that holds their ships. Each of them has 2 ships: The Cruiser which is 3 cells long and The Submarine which is 2 cells. A board will look like this:
